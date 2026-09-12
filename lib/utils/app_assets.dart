@@ -2,8 +2,11 @@ class AppAssets{
   static const String onBoardingLightImage = 'assets/images/on_boarding_light.png';
   static const String onBoardingDarkImage = 'assets/images/on_boarding_dark.png';
   static const String sportLightImage = 'assets/images/sport_light_image.png';
+  static const String logoSplash = 'assets/images/logo_splash.png';
+  static const String logoSplashDarkImage = 'assets/images/logo_splash_dark.png';
   static const String logoLightImage = 'assets/images/logo_light.png';
   static const String logoDarkImage = 'assets/images/logo_dark.png';
+  static const String creativeImage = 'assets/images/creative_image.png';
   static const String logoRouteImage = 'assets/images/logo_route.png';
   static const String sportDarkImage = 'assets/images/sport_dark_image.png';
   static const String birthdayLightImage = 'assets/images/birthday_light_image.png';
