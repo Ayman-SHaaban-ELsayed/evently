@@ -1,0 +1,14 @@
+{
+"language" : "Language",
+"english" : "English",
+"arabic" : "Arabic",
+"theme" : "Theme",
+"dark":"Dark",
+"light":"Light",
+"dark_mode":"Dark mode",
+"light_mode":"Light mode",
+"logout":"Logout",
+"home":"Home",
+"favorite":"Favorite",
+"profile":"Profile"
+}
