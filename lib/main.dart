@@ -2,6 +2,7 @@ import 'package:final_project/l10n/app_localizations.dart';
 import 'package:final_project/providers/app_language_provider.dart';
 import 'package:final_project/providers/app_theme_provider.dart';
 import 'package:final_project/ui/home/home_screen.dart';
+import 'package:final_project/ui/splash/splash_screen.dart';
 import 'package:final_project/utils/app_routes.dart';
 import 'package:final_project/utils/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,11 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.homeRouteName,
-      routes: {AppRoutes.homeRouteName: (context) => HomeScreen()},
+      initialRoute: AppRoutes.splashScreen,
+      routes: {
+        AppRoutes.homeRouteName: (context) => HomeScreen(),
+        AppRoutes.splashScreen: (context) => SplashScreen(),
+      },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: Locale(languageProvider.appLanguage),

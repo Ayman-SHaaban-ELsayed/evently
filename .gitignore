@@ -46,3 +46,5 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+/lib/ui/home/tabs/profiles/profile_tab_xxx_test.dart
+/lib/ui/home/tabs/profiles/widgets/theme/theme_bottom_sheet_xxx_test.dart
