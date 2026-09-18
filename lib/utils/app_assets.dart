@@ -18,4 +18,7 @@ class AppAssets{
   static const String exhibitionLightImage = 'assets/images/exhibition_light_image.png';
   static const String exhibitionDarkImage = 'assets/images/exhibition_dark_image.png';
   static const String googleLogo = 'assets/images/icon_google.png';
+  static const String onboardingOne = 'assets/images/onboarding_one.png';
+  static const String onboardingTwo = 'assets/images/onboarding_two.png';
+  static const String onboardingThree = 'assets/images/onboarding_three.png';
 }
