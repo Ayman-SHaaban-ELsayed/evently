@@ -1,6 +1,7 @@
 import 'package:final_project/l10n/app_localizations.dart';
 import 'package:final_project/providers/app_language_provider.dart';
 import 'package:final_project/providers/app_theme_provider.dart';
+import 'package:final_project/ui/widgets/custom_elevated_button.dart';
 import 'package:final_project/utils/app_assets.dart';
 import 'package:final_project/utils/app_colors.dart';
 import 'package:final_project/utils/app_routes.dart';
@@ -154,23 +155,38 @@ class OnboardingHome extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: height * 0.068,
-                child: ElevatedButton(
+                child: CustomElevatedButton(
                   onPressed: () {
                     // TODO: التوجيه
-                    Navigator.pushReplacementNamed(context, AppRoutes.onboardingRouteName);
+                    Navigator.pushReplacementNamed(
+                      context,
+                      AppRoutes.onboardingRouteName,
+                    );
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(height * 0.019),
-                    ),
-                  ),
                   child: Text(
                     AppLocalizations.of(context)!.lets_start,
                     style: Theme.of(context).textTheme.bodyMedium
                         ?.copyWith(color: AppColors.whiteColor),
                   ),
                 ),
+
+                // ElevatedButton(
+                //   onPressed: () {
+                //     // TODO: التوجيه
+                //     Navigator.pushReplacementNamed(context, AppRoutes.onboardingRouteName);
+                //   },
+                //   style: ElevatedButton.styleFrom(
+                //     backgroundColor: primaryColor,
+                //     shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(height * 0.019),
+                //     ),
+                //   ),
+                //   child: Text(
+                //     AppLocalizations.of(context)!.lets_start,
+                //     style: Theme.of(context).textTheme.bodyMedium
+                //         ?.copyWith(color: AppColors.whiteColor),
+                //   ),
+                // ),
               ),
             ],
           ),
@@ -192,12 +208,10 @@ class OnboardingHome extends StatelessWidget {
       child: Container(
         height: height * 0.049,
         padding: EdgeInsets.symmetric(horizontal: width * 0.042),
-         decoration: BoxDecoration(
+        decoration: BoxDecoration(
           color: isSelected ? primaryColor : AppColors.transparentColor,
           border: Border.all(color: primaryColor, width: 1.5),
-          borderRadius: BorderRadius.circular(
-            height * 0.014,
-          ),
+          borderRadius: BorderRadius.circular(height * 0.014),
         ),
         alignment: Alignment.center,
         child: content,

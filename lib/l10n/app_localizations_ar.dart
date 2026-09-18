@@ -37,6 +37,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get logout => 'تسجيل الخروج';
 
   @override
+  String get login_to_your_account => 'تسجيل الدخول الى حسابك';
+
+  @override
   String get home => 'الرئيسية';
 
   @override
@@ -84,4 +87,76 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get get_started => 'ابدأ الآن';
+
+  @override
+  String get please_enter_password => 'ادخل كلمة المرور';
+
+  @override
+  String get forget_password => 'نسيت كلمة المرور';
+
+  @override
+  String get login => 'تسجيل الدخول';
+
+  @override
+  String get do_not_have_an_account => 'ليس لديلك حساب ؟';
+
+  @override
+  String get sign_up => 'الاشتراك فالتطبيق';
+
+  @override
+  String get sign_up2 => 'تسجيل الاشتراك';
+
+  @override
+  String get or => 'أو';
+
+  @override
+  String get login_with_google => 'تسجيل الدخول عن طريق جوجل';
+
+  @override
+  String get create_your_account => 'انشأ حسابك';
+
+  @override
+  String get enter_name => 'ادخل اسمك';
+
+  @override
+  String get confirm_password => 'تأكيد كلمة المرور';
+
+  @override
+  String get already_have_an_account => 'لديك حساب بالفعل ؟';
+
+  @override
+  String get signup_with_google => 'الاشتراك عن طريق جوجل';
+
+  @override
+  String get password_at_least => 'كلمة المرور يجب ان تكون 6 حروف على الأقل';
+
+  @override
+  String get password_dont_match => 'كلمة المرور غير مطابقة';
+
+  @override
+  String get search_event => 'بحث عن حدث';
+
+  @override
+  String get welcome_back => 'مرحبا بك💫';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get sport => 'الرياضة';
+
+  @override
+  String get birthday => 'ميلاد';
+
+  @override
+  String get meeting => 'اجتماع';
+
+  @override
+  String get book_club => 'نادى';
+
+  @override
+  String get exhibition => 'معرض';
+
+  @override
+  String get please_enter_email => 'ادخل البريد الالكترونى';
 }

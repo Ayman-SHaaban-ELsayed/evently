@@ -8,6 +8,7 @@
 "dark_mode":"Dark mode",
 "light_mode":"Light mode",
 "logout":"Logout",
+"login_to_your_account":"Login to your account",
 "home":"Home",
 "favorite":"Favorite",
 "profile":"Profile",
@@ -22,5 +23,33 @@
 "onboarding_desc_3": "Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.",
 "skip": "Skip",
 "next": "Next",
-"get_started": "Get started"
+"get_started": "Get started",
+"please_enter_password": "Enter your password",
+"forget_password": "Forget Password",
+"login": "Login",
+"do_not_have_an_account": "do not have an account ?",
+"sign_up": "Signup",
+"sign_up2": "Sign up",
+"or": "Or",
+"login_with_google": "Login with Google",
+
+
+
+"create_your_account": "Create your account",
+"enter_name": "Enter your name",
+"confirm_password": "confirm your Password",
+"already_have_an_account": "Already have an account ?",
+"signup_with_google": "Sign up with Google",
+"password_at_least": "password should be at least 6 chars." ,
+"password_dont_match": "password do not match." ,
+"search_event": "Search for event" ,
+"welcome_back": "welcome back💫" ,
+"all": "All" ,
+"sport": "Sport" ,
+"birthday": "Birthday" ,
+"meeting": "Meeting" ,
+"book_club": "Book club" ,
+"exhibition": "Exhibition" ,
+"please_enter_email": "Enter your email"
+
 }

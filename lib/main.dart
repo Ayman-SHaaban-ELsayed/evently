@@ -1,6 +1,8 @@
 import 'package:final_project/l10n/app_localizations.dart';
 import 'package:final_project/providers/app_language_provider.dart';
 import 'package:final_project/providers/app_theme_provider.dart';
+import 'package:final_project/ui/auth/login/login_screen.dart';
+import 'package:final_project/ui/auth/register/register_screen.dart';
 import 'package:final_project/ui/home/home_screen.dart';
 import 'package:final_project/ui/onboarding/onboarding_home.dart';
 import 'package:final_project/ui/onboarding/onboarding_screen.dart';
@@ -39,6 +41,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.splashScreen: (context) => SplashScreen(),
         AppRoutes.onboardingHome: (context) => OnboardingHome(),
         AppRoutes.onboardingRouteName: (context) => OnboardingScreen(),
+        AppRoutes.loginRouteName: (context) => LoginScreen(),
+        AppRoutes.registerScreen: (context) => RegisterScreen(),
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
