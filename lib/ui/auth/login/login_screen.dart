@@ -36,12 +36,16 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 spacing: height * .02,
                 children: [
-                  Image.asset(
-                    themeProvider.isDark()
-                        ? AppAssets.logoDarkImage
-                        : AppAssets.logoLightImage,
-                    width: width * .37,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * .30),
+                    child: Image.asset(
+                      themeProvider.isDark()
+                          ? AppAssets.logoDarkImage
+                          : AppAssets.logoLightImage,
+                      width: width * .37,
+                    ),
                   ),
+                  SizedBox(height: height * .03),
                   Text(
                     AppLocalizations.of(context)!.login_to_your_account,
                     style: Theme.of(context).textTheme.headlineSmall,
@@ -91,7 +95,7 @@ class LoginScreen extends StatelessWidget {
                             .please_enter_password;
                       }
                       if (text.length < 6) {
-                    return    AppLocalizations.of(context)!.password_at_least;
+                        return AppLocalizations.of(context)!.password_at_least;
                       }
                       return null;
                     },
