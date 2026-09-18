@@ -1,6 +1,7 @@
 import 'package:final_project/l10n/app_localizations.dart';
 import 'package:final_project/providers/app_theme_provider.dart';
 import 'package:final_project/ui/onboarding/model/onboarding_model.dart';
+import 'package:final_project/ui/widgets/custom_elevated_button.dart';
 import 'package:final_project/utils/app_assets.dart';
 import 'package:final_project/utils/app_colors.dart';
 import 'package:final_project/utils/app_routes.dart';
@@ -32,7 +33,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     var height = context.height;
     bool isDark = themeProvider.isDark();
 
-     final List<OnboardingModel> pages = [
+    final List<OnboardingModel> pages = [
       OnboardingModel(
         image: AppAssets.onboardingOne,
         title: AppLocalizations.of(context)!.onboarding_title_1,
@@ -169,7 +170,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               SizedBox(
                 width: double.infinity,
                 height: height * 0.068,
-                child: ElevatedButton(
+                child: CustomElevatedButton(
                   onPressed: () {
                     if (_currentIndex == 2) {
                       // TODO: التوجيه للشاشة الرئيسية
@@ -184,12 +185,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       );
                     }
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).cardColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(height * 0.019),
-                    ),
-                  ),
                   child: Text(
                     _currentIndex == 2
                         ? AppLocalizations.of(context)!.get_started
@@ -198,6 +193,38 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ?.copyWith(color: AppColors.whiteColor),
                   ),
                 ),
+
+                // ElevatedButton(
+                //   onPressed: ()
+                //   {
+                //     if (_currentIndex == 2) {
+                //       // TODO: التوجيه للشاشة الرئيسية
+                //       Navigator.pushReplacementNamed(
+                //         context,
+                //         AppRoutes.homeRouteName,
+                //       );
+                //     } else {
+                //       _pageController.nextPage(
+                //         duration: const Duration(milliseconds: 300),
+                //         curve: Curves.easeInOut,
+                //       );
+                //     }
+                //   },
+                //   style: ElevatedButton.styleFrom(
+                //     backgroundColor: Theme.of(context).cardColor,
+                //     shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(height * 0.019),
+                //     ),
+                //   ),
+                //   child:
+                //   Text(
+                //     _currentIndex == 2
+                //         ? AppLocalizations.of(context)!.get_started
+                //         : AppLocalizations.of(context)!.next,
+                //     style: Theme.of(context).textTheme.bodyMedium
+                //         ?.copyWith(color: AppColors.whiteColor),
+                //   ),
+                // ),
               ),
             ],
           ),

@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 0,
         currentIndex: selectedIndex,
         onTap: (index) {
           selectedIndex = index;
@@ -50,7 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //todo navigate to add event screen
-        },child: Icon(Icons.add,color: AppColors.whiteColor,size: 25,),
+        },
+        child: Icon(Icons.add, color: AppColors.whiteColor, size: 25),
       ),
     );
   }

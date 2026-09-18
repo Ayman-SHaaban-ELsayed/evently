@@ -97,7 +97,7 @@ class AppStyles {
   static TextStyle medium16MainColor = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.w500,
-    color: AppColors.mainLightColor, // بناءً على السياق السابق
+    color: AppColors.mainLightColor,
   );
 
   static TextStyle semi16MainLightColor = GoogleFonts.poppins(
@@ -132,6 +132,10 @@ class AppStyles {
 
   static TextStyle medium18White = GoogleFonts.poppins(
     fontSize: 18,
+    fontWeight: FontWeight.w500,
+    color: AppColors.whiteColor,
+  );  static TextStyle medium20White = GoogleFonts.poppins(
+    fontSize: 20,
     fontWeight: FontWeight.w500,
     color: AppColors.whiteColor,
   );

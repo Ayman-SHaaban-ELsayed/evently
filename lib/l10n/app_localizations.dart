@@ -152,6 +152,12 @@ abstract class AppLocalizations {
   /// **'Logout'**
   String get logout;
 
+  /// No description provided for @login_to_your_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Login to your account'**
+  String get login_to_your_account;
+
   /// No description provided for @home.
   ///
   /// In en, this message translates to:
@@ -241,6 +247,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Get started'**
   String get get_started;
+
+  /// No description provided for @please_enter_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get please_enter_password;
+
+  /// No description provided for @forget_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Forget Password'**
+  String get forget_password;
+
+  /// No description provided for @login.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get login;
+
+  /// No description provided for @do_not_have_an_account.
+  ///
+  /// In en, this message translates to:
+  /// **'do not have an account ?'**
+  String get do_not_have_an_account;
+
+  /// No description provided for @sign_up.
+  ///
+  /// In en, this message translates to:
+  /// **'Signup'**
+  String get sign_up;
+
+  /// No description provided for @sign_up2.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up'**
+  String get sign_up2;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'Or'**
+  String get or;
+
+  /// No description provided for @login_with_google.
+  ///
+  /// In en, this message translates to:
+  /// **'Login with Google'**
+  String get login_with_google;
+
+  /// No description provided for @create_your_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your account'**
+  String get create_your_account;
+
+  /// No description provided for @enter_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your name'**
+  String get enter_name;
+
+  /// No description provided for @confirm_password.
+  ///
+  /// In en, this message translates to:
+  /// **'confirm your Password'**
+  String get confirm_password;
+
+  /// No description provided for @already_have_an_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account ?'**
+  String get already_have_an_account;
+
+  /// No description provided for @signup_with_google.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up with Google'**
+  String get signup_with_google;
+
+  /// No description provided for @password_at_least.
+  ///
+  /// In en, this message translates to:
+  /// **'password should be at least 6 chars.'**
+  String get password_at_least;
+
+  /// No description provided for @password_dont_match.
+  ///
+  /// In en, this message translates to:
+  /// **'password do not match.'**
+  String get password_dont_match;
+
+  /// No description provided for @search_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for event'**
+  String get search_event;
+
+  /// No description provided for @welcome_back.
+  ///
+  /// In en, this message translates to:
+  /// **'welcome back💫'**
+  String get welcome_back;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @sport.
+  ///
+  /// In en, this message translates to:
+  /// **'Sport'**
+  String get sport;
+
+  /// No description provided for @birthday.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthday'**
+  String get birthday;
+
+  /// No description provided for @meeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Meeting'**
+  String get meeting;
+
+  /// No description provided for @book_club.
+  ///
+  /// In en, this message translates to:
+  /// **'Book club'**
+  String get book_club;
+
+  /// No description provided for @exhibition.
+  ///
+  /// In en, this message translates to:
+  /// **'Exhibition'**
+  String get exhibition;
+
+  /// No description provided for @please_enter_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get please_enter_email;
 }
 
 class _AppLocalizationsDelegate

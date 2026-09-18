@@ -37,6 +37,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logout => 'Logout';
 
   @override
+  String get login_to_your_account => 'Login to your account';
+
+  @override
   String get home => 'Home';
 
   @override
@@ -84,4 +87,76 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get get_started => 'Get started';
+
+  @override
+  String get please_enter_password => 'Enter your password';
+
+  @override
+  String get forget_password => 'Forget Password';
+
+  @override
+  String get login => 'Login';
+
+  @override
+  String get do_not_have_an_account => 'do not have an account ?';
+
+  @override
+  String get sign_up => 'Signup';
+
+  @override
+  String get sign_up2 => 'Sign up';
+
+  @override
+  String get or => 'Or';
+
+  @override
+  String get login_with_google => 'Login with Google';
+
+  @override
+  String get create_your_account => 'Create your account';
+
+  @override
+  String get enter_name => 'Enter your name';
+
+  @override
+  String get confirm_password => 'confirm your Password';
+
+  @override
+  String get already_have_an_account => 'Already have an account ?';
+
+  @override
+  String get signup_with_google => 'Sign up with Google';
+
+  @override
+  String get password_at_least => 'password should be at least 6 chars.';
+
+  @override
+  String get password_dont_match => 'password do not match.';
+
+  @override
+  String get search_event => 'Search for event';
+
+  @override
+  String get welcome_back => 'welcome back💫';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get sport => 'Sport';
+
+  @override
+  String get birthday => 'Birthday';
+
+  @override
+  String get meeting => 'Meeting';
+
+  @override
+  String get book_club => 'Book club';
+
+  @override
+  String get exhibition => 'Exhibition';
+
+  @override
+  String get please_enter_email => 'Enter your email';
 }

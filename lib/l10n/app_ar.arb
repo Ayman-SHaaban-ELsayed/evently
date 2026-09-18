@@ -8,6 +8,7 @@
 "dark_mode":"الوضع الليلى",
 "light_mode":"الوضع النهارى",
 "logout":"تسجيل الخروج",
+"login_to_your_account":"تسجيل الدخول الى حسابك",
 "home":"الرئيسية",
 "favorite":"المفضلة",
 "profile":"الملف الشخصى",
@@ -22,5 +23,32 @@
 "onboarding_desc_3": "اجعل كل فعالية لا تُنسى من خلال مشاركة التجربة مع الآخرين. منصتنا تتيح لك دعوة الأصدقاء وإبقاء الجميع على اطلاع، والاحتفال باللحظات معاً.",
 "skip": "تخطي",
 "next": "التالي",
-"get_started": "ابدأ الآن"
+"get_started": "ابدأ الآن",
+"please_enter_password": "ادخل كلمة المرور",
+"forget_password": "نسيت كلمة المرور",
+"login": "تسجيل الدخول",
+"do_not_have_an_account": "ليس لديلك حساب ؟",
+"sign_up": "الاشتراك فالتطبيق",
+"sign_up2": "تسجيل الاشتراك",
+"or": "أو",
+"login_with_google": "تسجيل الدخول عن طريق جوجل",
+
+
+
+"create_your_account": "انشأ حسابك",
+"enter_name": "ادخل اسمك",
+"confirm_password": "تأكيد كلمة المرور",
+"already_have_an_account": "لديك حساب بالفعل ؟",
+"signup_with_google": "الاشتراك عن طريق جوجل",
+"password_at_least": "كلمة المرور يجب ان تكون 6 حروف على الأقل",
+"password_dont_match": "كلمة المرور غير مطابقة" ,
+"search_event": "بحث عن حدث" ,
+"welcome_back": "مرحبا بك💫" ,
+"all": "الكل" ,
+"sport": "الرياضة" ,
+"birthday": "ميلاد" ,
+"meeting": "اجتماع" ,
+"book_club": "نادى" ,
+"exhibition": "معرض" ,
+"please_enter_email": "ادخل البريد الالكترونى"
 }
