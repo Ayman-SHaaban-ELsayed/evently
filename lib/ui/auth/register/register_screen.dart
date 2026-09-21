@@ -7,16 +7,27 @@ import 'package:final_project/utils/app_colors.dart';
 import 'package:final_project/utils/app_routes.dart';
 import 'package:final_project/utils/app_styles.dart';
 import 'package:final_project/utils/size_utils.dart';
+import 'package:final_project/utils/toast_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   RegisterScreen({super.key});
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   var nameController = TextEditingController();
+
   var emailController = TextEditingController();
+
   var passwordController = TextEditingController();
+
   var rePasswordController = TextEditingController();
+
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -232,8 +243,47 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 
-  void registrt() {
+  void registrt() async {
+    print("registrt:///${formKey.currentState?.validate()}");
     //todo=> nav to h.screen
-    if (formKey.currentState!.validate()) {}
+    if (formKey.currentState?.validate() == true) {
+      try {
+        final credintial = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+              email: emailController.text,
+              password: passwordController.text,
+            );
+        ToastUtils.toastMgs(
+          msg: 'register successfully',
+          backgroundColor: Theme.of(context).cardColor,
+          textColor: AppColors.whiteColor,
+        );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == "weak-password") {
+
+          ToastUtils.toastMgs(
+            msg: ' the password is not strong enough.',
+            backgroundColor: AppColors.redColor,
+            textColor: AppColors.whiteColor,
+          );
+        } else if (e.code == "email-already-in-use") {
+          ToastUtils.toastMgs(
+            msg: 'there already exists an account with the given email address.',
+            backgroundColor: AppColors.redColor,
+            textColor: AppColors.whiteColor,
+          );
+
+
+        } else {
+          ToastUtils.toastMgs(
+            msg: ' error: $e',
+            backgroundColor: AppColors.redColor,
+            textColor: AppColors.whiteColor,
+          );
+        }
+      } catch (e) {
+        print('error: $e');
+      }
+    }
   }
 }
