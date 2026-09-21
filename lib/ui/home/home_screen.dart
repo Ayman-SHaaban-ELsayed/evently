@@ -3,6 +3,7 @@ import 'package:final_project/ui/home/tabs/favorite/favorite_tab.dart';
 import 'package:final_project/ui/home/tabs/home/home_tab.dart';
 import 'package:final_project/ui/home/tabs/profiles/profile_tab.dart';
 import 'package:final_project/utils/app_colors.dart';
+import 'package:final_project/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -51,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //todo navigate to add event screen
+          Navigator.of(context).pushNamed(AppRoutes.addEventScreen);
         },
         child: Icon(Icons.add, color: AppColors.whiteColor, size: 25),
       ),

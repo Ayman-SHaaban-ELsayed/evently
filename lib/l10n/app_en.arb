@@ -50,6 +50,25 @@
 "meeting": "Meeting" ,
 "book_club": "Book club" ,
 "exhibition": "Exhibition" ,
+"add_event": "Add Event" ,
+"event_description": "Event description" ,
+"description": "Description" ,
+"event_title": "Event title" ,
+"title": "Title" ,
+
+
+
+"choose_time": "choose time" ,
+"event_time": "event time" ,
+"choose_date": "choose date" ,
+"event_date": "event date" ,
+"please_title": "Please enter event title." ,
+"please_description": "Please enter event description" ,
+
+
+
+
+
 "please_enter_email": "Enter your email"
 
 }

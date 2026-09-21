@@ -50,5 +50,21 @@
 "meeting": "اجتماع" ,
 "book_club": "نادى" ,
 "exhibition": "معرض" ,
+"add_event": "اضافة حدث" ,
+"event_description": "وصف الحدث" ,
+"description": "الوصف" ,
+"event_title": "عنوان الحدث" ,
+"title": "العنوان" ,
+
+"choose_time": "اختر الوقت" ,
+"event_time": "وقت الحدث" ,
+"choose_date": "اختر التاريخ" ,
+"event_date": "تاريخ الحدث" ,
+"please_title": "برجاء ادخال العنوان" ,
+"please_description": "برجاء ادخال الوصف" ,
+
+
+
+
 "please_enter_email": "ادخل البريد الالكترونى"
 }
