@@ -15,26 +15,30 @@ class AppTheme {
     cardColor: AppColors.mainLightColor,
     dividerColor: AppColors.strokeWhiteColor,
     highlightColor: AppColors.whiteColor,
+    appBarTheme: AppBarThemeData(
+      backgroundColor: AppColors.transparentColor,
+      centerTitle: true,
+    ),
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: AppColors.lightBgColor,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: AppColors.mainLightColor,
-        shape: StadiumBorder()
-  ),
+      shape: StadiumBorder(),
+    ),
     textTheme: TextTheme(
       headlineLarge: AppStyles.semi20Black,
-        headlineMedium: AppStyles.medium16Black,
-        bodyLarge: AppStyles.regular14Grey,
-        headlineSmall: AppStyles.semi24MainLightColor,
-        labelMedium: AppStyles.medium16MainColor,
+      headlineMedium: AppStyles.medium16Black,
+      bodyLarge: AppStyles.regular14Grey,
+      headlineSmall: AppStyles.semi24MainLightColor,
+      labelMedium: AppStyles.medium16MainColor,
       labelSmall: AppStyles.medium18MainColor,
-        labelLarge: AppStyles.semi14MainLightColor,
+      labelLarge: AppStyles.semi14MainLightColor,
       bodyMedium: AppStyles.semi16MainLightColor,
       bodySmall: AppStyles.medium14Black,
-        titleLarge: AppStyles.regular14MainLightColor,
-        titleMedium: AppStyles.medium20BlackColor,
-        titleSmall: AppStyles.medium18Black,
+      titleLarge: AppStyles.regular14MainLightColor,
+      titleMedium: AppStyles.medium20BlackColor,
+      titleSmall: AppStyles.medium18Black,
     ),
   );
 
@@ -50,26 +54,30 @@ class AppTheme {
     cardColor: AppColors.mainDarkColor,
     dividerColor: AppColors.mainLightColor,
     highlightColor: AppColors.darkInputColor,
+    appBarTheme: AppBarThemeData(
+      backgroundColor: AppColors.transparentColor,
+      centerTitle: true,
+    ),
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: AppColors.darkBgColor,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: AppColors.mainDarkColor,
-      shape: StadiumBorder()
+      backgroundColor: AppColors.mainDarkColor,
+      shape: StadiumBorder(),
     ),
     textTheme: TextTheme(
       headlineLarge: AppStyles.semi20White,
       headlineMedium: AppStyles.medium16White,
-        bodyLarge: AppStyles.regular14WhiteDarkColor,
+      bodyLarge: AppStyles.regular14WhiteDarkColor,
       headlineSmall: AppStyles.semi24White,
       labelMedium: AppStyles.medium16MainDarkColor,
-        labelSmall: AppStyles.medium18MainDarkColor,
-        labelLarge: AppStyles.semi14MainDarkColor,
+      labelSmall: AppStyles.medium18MainDarkColor,
+      labelLarge: AppStyles.semi14MainDarkColor,
       bodyMedium: AppStyles.semi16MainDark,
-        bodySmall: AppStyles.medium14White,
-        titleLarge: AppStyles.regular14MainDarkColor,
-        titleMedium: AppStyles.medium20WhiteDarkColor,
-        titleSmall: AppStyles.medium18White,
+      bodySmall: AppStyles.medium14White,
+      titleLarge: AppStyles.regular14MainDarkColor,
+      titleMedium: AppStyles.medium20WhiteDarkColor,
+      titleSmall: AppStyles.medium18White,
     ),
   );
 }
