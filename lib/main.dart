@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/firebase_options.dart';
 import 'package:final_project/l10n/app_localizations.dart';
 import 'package:final_project/providers/app_language_provider.dart';
@@ -20,6 +21,10 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  //لو عايزة يشتغل اوفلاين
+  // FirebaseFirestore.instance.disableNetwork();
+  //لو عايزة يشتغل اونلاين
+ // FirebaseFirestore.instance.enableNetwork();
   runApp(
     MultiProvider(
       providers: [
@@ -42,7 +47,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.homeRouteName,
+      initialRoute: AppRoutes.loginRouteName,
       routes: {
         AppRoutes.homeRouteName: (context) => HomeScreen(),
         AppRoutes.splashScreen: (context) => SplashScreen(),
