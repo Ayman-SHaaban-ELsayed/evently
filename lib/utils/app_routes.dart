@@ -7,4 +7,5 @@ class AppRoutes {
   static const String onboardingHome = 'onboarding_home';
   static const String onboardingRouteName = 'onboarding_screen';
   static const String registerScreen = 'register_screen';
+  static const String addEventScreen = 'add_event_screen';
 }

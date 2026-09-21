@@ -158,5 +158,38 @@ class AppLocalizationsAr extends AppLocalizations {
   String get exhibition => 'معرض';
 
   @override
+  String get add_event => 'اضافة حدث';
+
+  @override
+  String get event_description => 'وصف الحدث';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get event_title => 'عنوان الحدث';
+
+  @override
+  String get title => 'العنوان';
+
+  @override
+  String get choose_time => 'اختر الوقت';
+
+  @override
+  String get event_time => 'وقت الحدث';
+
+  @override
+  String get choose_date => 'اختر التاريخ';
+
+  @override
+  String get event_date => 'تاريخ الحدث';
+
+  @override
+  String get please_title => 'برجاء ادخال العنوان';
+
+  @override
+  String get please_description => 'برجاء ادخال الوصف';
+
+  @override
   String get please_enter_email => 'ادخل البريد الالكترونى';
 }

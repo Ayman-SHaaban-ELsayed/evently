@@ -1,6 +1,8 @@
+import 'package:final_project/firebase_options.dart';
 import 'package:final_project/l10n/app_localizations.dart';
 import 'package:final_project/providers/app_language_provider.dart';
 import 'package:final_project/providers/app_theme_provider.dart';
+import 'package:final_project/ui/add_event/add_event_screen.dart';
 import 'package:final_project/ui/auth/login/login_screen.dart';
 import 'package:final_project/ui/auth/register/register_screen.dart';
 import 'package:final_project/ui/home/home_screen.dart';
@@ -9,10 +11,15 @@ import 'package:final_project/ui/onboarding/onboarding_screen.dart';
 import 'package:final_project/ui/splash/splash_screen.dart';
 import 'package:final_project/utils/app_routes.dart';
 import 'package:final_project/utils/app_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(
       providers: [
@@ -35,7 +42,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.loginRouteName,
+      initialRoute: AppRoutes.homeRouteName,
       routes: {
         AppRoutes.homeRouteName: (context) => HomeScreen(),
         AppRoutes.splashScreen: (context) => SplashScreen(),
@@ -43,6 +50,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.onboardingRouteName: (context) => OnboardingScreen(),
         AppRoutes.loginRouteName: (context) => LoginScreen(),
         AppRoutes.registerScreen: (context) => RegisterScreen(),
+        AppRoutes.addEventScreen: (context) => AddEventScreen(),
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

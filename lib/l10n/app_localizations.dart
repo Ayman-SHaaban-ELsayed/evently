@@ -386,6 +386,72 @@ abstract class AppLocalizations {
   /// **'Exhibition'**
   String get exhibition;
 
+  /// No description provided for @add_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Event'**
+  String get add_event;
+
+  /// No description provided for @event_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Event description'**
+  String get event_description;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @event_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Event title'**
+  String get event_title;
+
+  /// No description provided for @title.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get title;
+
+  /// No description provided for @choose_time.
+  ///
+  /// In en, this message translates to:
+  /// **'choose time'**
+  String get choose_time;
+
+  /// No description provided for @event_time.
+  ///
+  /// In en, this message translates to:
+  /// **'event time'**
+  String get event_time;
+
+  /// No description provided for @choose_date.
+  ///
+  /// In en, this message translates to:
+  /// **'choose date'**
+  String get choose_date;
+
+  /// No description provided for @event_date.
+  ///
+  /// In en, this message translates to:
+  /// **'event date'**
+  String get event_date;
+
+  /// No description provided for @please_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter event title.'**
+  String get please_title;
+
+  /// No description provided for @please_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter event description'**
+  String get please_description;
+
   /// No description provided for @please_enter_email.
   ///
   /// In en, this message translates to:
