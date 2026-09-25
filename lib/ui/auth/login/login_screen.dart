@@ -223,6 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
           textColor: AppColors.whiteColor,
           gravity: ToastGravity.BOTTOM
         );
+        Navigator.of(context).pushReplacementNamed(AppRoutes.homeRouteName);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'invalid-credential') {
           ToastUtils.toastMgs(
