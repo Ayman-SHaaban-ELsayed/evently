@@ -7,14 +7,24 @@ import 'package:final_project/utils/app_colors.dart';
 import 'package:final_project/utils/app_routes.dart';
 import 'package:final_project/utils/app_styles.dart';
 import 'package:final_project/utils/size_utils.dart';
+import 'package:final_project/utils/toast_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
 
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  var emailController = TextEditingController(text: 'a@gmail.com');
+
+  var passwordController = TextEditingController(text: '5555555555');
+
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -197,8 +207,52 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void login() {
+  void login() async {
+    print("registrt:///${formKey.currentState?.validate()}");
     //todo
-    if (formKey.currentState!.validate()) {}
+    if (formKey.currentState?.validate() == true) {
+      try {
+        final credintial = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+              email: emailController.text,
+              password: passwordController.text,
+            );
+        ToastUtils.toastMgs(
+          msg: 'login successfully',
+          backgroundColor: Theme.of(context).cardColor,
+          textColor: AppColors.whiteColor,
+          gravity: ToastGravity.BOTTOM
+        );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'invalid-credential') {
+          ToastUtils.toastMgs(
+            msg: 'the email or password is incorrect.',
+            backgroundColor: AppColors.redColor,
+            textColor: AppColors.whiteColor,
+          );
+
+        } else if (e.code == 'network-request-failed') {
+          ToastUtils.toastMgs(
+            msg:'''there was a network request error, for example the user doesn't have internet connection''',
+            backgroundColor: AppColors.redColor,
+            textColor: AppColors.whiteColor,
+          );
+
+        } else {
+          ToastUtils.toastMgs(
+            msg: 'errorCode:${e.code}, error: $e',
+            backgroundColor: AppColors.redColor,
+            textColor: AppColors.whiteColor,
+          );
+        }
+      } catch (e) {
+        ToastUtils.toastMgs(
+          msg: ' error: $e',
+          backgroundColor: AppColors.redColor,
+          textColor: AppColors.whiteColor,
+        );
+
+       }
+    }
   }
 }

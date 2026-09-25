@@ -1,4 +1,6 @@
+import 'package:final_project/firebase_utils.dart';
 import 'package:final_project/l10n/app_localizations.dart';
+import 'package:final_project/model/event.dart';
 import 'package:final_project/providers/app_theme_provider.dart';
 import 'package:final_project/ui/add_event/widget/custom_date_time_widget.dart';
 import 'package:final_project/ui/home/tabs/widgets/tab_item.dart';
@@ -8,6 +10,7 @@ import 'package:final_project/utils/app_assets.dart';
 import 'package:final_project/utils/app_colors.dart';
 import 'package:final_project/utils/app_styles.dart';
 import 'package:final_project/utils/size_utils.dart';
+import 'package:final_project/utils/toast_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -267,6 +270,39 @@ class _AddEventScreenState extends State<AddEventScreen> {
   void addEvent() {
     if (formKey.currentState?.validate() == true) {
       //todo add event to firestore
+      Event event = Event(
+        eventImage: selectedEventImage,
+        eventName: selectedEventName,
+        eventTitle: title,
+        eventDescription: description,
+        eventDate: DateTime(
+          selectedDate!.year,
+          selectedDate!.day,
+          selectedDate!.minute,
+        ),
+      );
+      //future  success:     online: .then()    , offline: timeout()
+      //future  fail
+      //onError contains :stacktrace
+      FirebaseUtils.addEventToFirestoreWithConverter(event)
+          .then((value) {
+            ToastUtils.toastMgs(
+              msg: 'Event add successfully',
+              backgroundColor: Theme.of(context).cardColor,
+              textColor: AppColors.whiteColor,
+            );
+            // print('Event add successfully');
+//todo back to home screen (pop)
+          })
+          .catchError((onError) {
+            ToastUtils.toastMgs(
+              msg: onError.toString(),
+              backgroundColor: AppColors.redColor,
+              textColor: AppColors.whiteColor,
+            );
+
+            // print(onError.toString());
+          });
     }
   }
 }
