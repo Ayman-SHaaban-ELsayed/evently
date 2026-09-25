@@ -277,8 +277,10 @@ class _AddEventScreenState extends State<AddEventScreen> {
         eventDescription: description,
         eventDate: DateTime(
           selectedDate!.year,
+          selectedDate!.month,
           selectedDate!.day,
-          selectedDate!.minute,
+          selectedTime!.hour,
+          selectedTime!.minute,
         ),
       );
       //future  success:     online: .then()    , offline: timeout()
