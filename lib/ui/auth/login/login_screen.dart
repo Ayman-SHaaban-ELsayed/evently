@@ -1,5 +1,8 @@
+import 'package:final_project/firebase_utils.dart';
 import 'package:final_project/l10n/app_localizations.dart';
 import 'package:final_project/providers/app_theme_provider.dart';
+import 'package:final_project/providers/user_provider.dart';
+import 'package:final_project/ui/home/tabs/widgets/main_loading_widget.dart';
 import 'package:final_project/ui/widgets/custom_elevated_button.dart';
 import 'package:final_project/ui/widgets/custom_text_field.dart';
 import 'package:final_project/utils/app_assets.dart';
@@ -21,11 +24,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var emailController = TextEditingController(text: 'a@gmail.com');
+  var emailController = TextEditingController();
 
-  var passwordController = TextEditingController(text: '5555555555');
+  var passwordController = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -127,10 +131,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   CustomElevatedButton(
                     onPressed: login,
-                    child: Text(
-                      AppLocalizations.of(context)!.login,
-                      style: AppStyles.medium20White,
-                    ),
+                    child: isLoading
+                        ? MainLoadingWidget()
+                        : Text(
+                            AppLocalizations.of(context)!.login,
+                            style: AppStyles.medium20White,
+                          ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -212,48 +218,74 @@ class _LoginScreenState extends State<LoginScreen> {
     //todo
     if (formKey.currentState?.validate() == true) {
       try {
+        //todo is loading => true
+        isLoading = true;
+        setState(() {});
+        //todo auth
         final credintial = await FirebaseAuth.instance
             .signInWithEmailAndPassword(
               email: emailController.text,
               password: passwordController.text,
             );
+
+        //todo read data firestore
+        var user = await FirebaseUtils.readUserFromFireStore(
+          credintial.user?.uid ?? '',
+        );
+        if (user == null) {
+          isLoading = false;
+          setState(() {});
+          return;
+        }
+        //todo save in provider
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.updateUser(user);
+        //todo isloading =>false
+        isLoading = false;
+
         ToastUtils.toastMgs(
           msg: 'login successfully',
           backgroundColor: Theme.of(context).cardColor,
           textColor: AppColors.whiteColor,
-          gravity: ToastGravity.BOTTOM
+          gravity: ToastGravity.BOTTOM,
         );
         Navigator.of(context).pushReplacementNamed(AppRoutes.homeRouteName);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'invalid-credential') {
+          isLoading = false;
           ToastUtils.toastMgs(
             msg: 'the email or password is incorrect.',
             backgroundColor: AppColors.redColor,
             textColor: AppColors.whiteColor,
+            gravity: ToastGravity.BOTTOM,
           );
-
         } else if (e.code == 'network-request-failed') {
+          isLoading = false;
           ToastUtils.toastMgs(
-            msg:'''there was a network request error, for example the user doesn't have internet connection''',
+            msg: '''there was a network request error, for example the user doesn't have internet connection''',
             backgroundColor: AppColors.redColor,
             textColor: AppColors.whiteColor,
+            gravity: ToastGravity.BOTTOM,
           );
-
         } else {
+          isLoading = false;
           ToastUtils.toastMgs(
             msg: 'errorCode:${e.code}, error: $e',
             backgroundColor: AppColors.redColor,
             textColor: AppColors.whiteColor,
+            gravity: ToastGravity.BOTTOM,
           );
         }
       } catch (e) {
+        isLoading = false;
         ToastUtils.toastMgs(
           msg: ' error: $e',
           backgroundColor: AppColors.redColor,
           textColor: AppColors.whiteColor,
+          gravity: ToastGravity.BOTTOM,
         );
-
-       }
+      }
+      setState(() {});
     }
   }
 }

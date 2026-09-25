@@ -3,6 +3,7 @@ import 'package:final_project/firebase_options.dart';
 import 'package:final_project/l10n/app_localizations.dart';
 import 'package:final_project/providers/app_language_provider.dart';
 import 'package:final_project/providers/app_theme_provider.dart';
+import 'package:final_project/providers/user_provider.dart';
 import 'package:final_project/ui/add_event/add_event_screen.dart';
 import 'package:final_project/ui/auth/login/login_screen.dart';
 import 'package:final_project/ui/auth/register/register_screen.dart';
@@ -30,6 +31,7 @@ void main() async{
       providers: [
         ChangeNotifierProvider(create: (context) => AppLanguageProvider()),
         ChangeNotifierProvider(create: (context) => AppThemeProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: const MyApp(),
     ),
@@ -47,7 +49,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.loginRouteName,
+      initialRoute: AppRoutes.splashScreen,
       routes: {
         AppRoutes.homeRouteName: (context) => HomeScreen(),
         AppRoutes.splashScreen: (context) => SplashScreen(),

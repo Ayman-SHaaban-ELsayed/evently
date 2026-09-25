@@ -62,6 +62,9 @@
 "event_date": "تاريخ الحدث" ,
 "please_title": "برجاء ادخال العنوان" ,
 "please_description": "برجاء ادخال الوصف" ,
+"no_event_found": "لم نعثر على اى احداث" ,
+"no_favourite_event_found": "لم نعثر على اى احداث مفضلة" ,
+"event_updated_successfully": "تم تحديث الحدث بنجاح" ,
 
 
 

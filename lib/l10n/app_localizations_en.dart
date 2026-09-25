@@ -191,5 +191,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get please_description => 'Please enter event description';
 
   @override
+  String get no_event_found => 'No event found';
+
+  @override
+  String get no_favourite_event_found => 'No favourite event found';
+
+  @override
+  String get event_updated_successfully => 'Event updated successfully';
+
+  @override
   String get please_enter_email => 'Enter your email';
 }

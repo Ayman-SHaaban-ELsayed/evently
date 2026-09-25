@@ -51,3 +51,6 @@ app.*.map.json
 /lib/firebase_options.dart
 /android/app/google-services.json
 /firebase.json
+/ayman_notes_firestore
+/ayman_notes_future_and_stream_contrloller.dart
+/lib/ui/home/tabs/home/home_tab_hand_sort_deprecated.dart
