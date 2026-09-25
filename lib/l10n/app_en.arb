@@ -64,6 +64,9 @@
 "event_date": "event date" ,
 "please_title": "Please enter event title." ,
 "please_description": "Please enter event description" ,
+"no_event_found": "No event found" ,
+"no_favourite_event_found": "No favourite event found" ,
+"event_updated_successfully": "Event updated successfully" ,
 
 
 

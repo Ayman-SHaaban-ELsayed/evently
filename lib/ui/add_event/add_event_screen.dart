@@ -274,6 +274,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
         eventImage: selectedEventImage,
         eventName: selectedEventName,
         eventTitle: title,
+        eventCategoryIndex: selectedIndex,
         eventDescription: description,
         eventDate: DateTime(
           selectedDate!.year,
@@ -288,6 +289,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
       //onError contains :stacktrace
       FirebaseUtils.addEventToFirestoreWithConverter(event)
           .then((value) {
+            //todo: call getAllEvents() =>provider
+
             ToastUtils.toastMgs(
               msg: 'Event add successfully',
               backgroundColor: Theme.of(context).cardColor,
@@ -295,6 +298,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
             );
             // print('Event add successfully');
 //todo back to home screen (pop)
+      Navigator.pop(context);
           })
           .catchError((onError) {
             ToastUtils.toastMgs(

@@ -452,6 +452,24 @@ abstract class AppLocalizations {
   /// **'Please enter event description'**
   String get please_description;
 
+  /// No description provided for @no_event_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No event found'**
+  String get no_event_found;
+
+  /// No description provided for @no_favourite_event_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No favourite event found'**
+  String get no_favourite_event_found;
+
+  /// No description provided for @event_updated_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Event updated successfully'**
+  String get event_updated_successfully;
+
   /// No description provided for @please_enter_email.
   ///
   /// In en, this message translates to:

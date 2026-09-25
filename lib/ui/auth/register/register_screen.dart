@@ -1,5 +1,9 @@
+import 'package:final_project/firebase_utils.dart';
 import 'package:final_project/l10n/app_localizations.dart';
+import 'package:final_project/model/my_user.dart';
 import 'package:final_project/providers/app_theme_provider.dart';
+import 'package:final_project/providers/user_provider.dart';
+import 'package:final_project/ui/home/tabs/widgets/main_loading_widget.dart';
 import 'package:final_project/ui/widgets/custom_elevated_button.dart';
 import 'package:final_project/ui/widgets/custom_text_field.dart';
 import 'package:final_project/utils/app_assets.dart';
@@ -10,6 +14,7 @@ import 'package:final_project/utils/size_utils.dart';
 import 'package:final_project/utils/toast_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -20,15 +25,15 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  var nameController = TextEditingController(text: 'a');
+  var nameController = TextEditingController();
 
-  var emailController = TextEditingController(text: 'a@gmail.com');
+  var emailController = TextEditingController();
 
-  var passwordController = TextEditingController(text: '5555555555');
+  var passwordController = TextEditingController();
 
-  var rePasswordController = TextEditingController(text: '5555555555');
-
+  var rePasswordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -162,10 +167,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(height: height * .02),
                   CustomElevatedButton(
                     onPressed: registrt,
-                    child: Text(
-                      AppLocalizations.of(context)!.sign_up2,
-                      style: AppStyles.medium20White,
-                    ),
+                    child: isLoading
+                        ? MainLoadingWidget()
+                        : Text(
+                            AppLocalizations.of(context)!.sign_up2,
+                            style: AppStyles.medium20White,
+                          ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -248,33 +255,49 @@ class _RegisterScreenState extends State<RegisterScreen> {
     //todo=> nav to h.screen
     if (formKey.currentState?.validate() == true) {
       try {
+        isLoading = true;
+        setState(() {});
         final credintial = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
               email: emailController.text,
               password: passwordController.text,
             );
+        //todo : save user in firestore
+        MyUser myUser = MyUser(
+          id: credintial.user?.uid ?? '',
+          name: nameController.text,
+          email: emailController.text,
+        );
+        await FirebaseUtils.addUserToFirestoreWithConverter(myUser);
+        //todo save in provider
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.updateUser(myUser);
+        isLoading = false;
         ToastUtils.toastMgs(
           msg: 'register successfully',
           backgroundColor: Theme.of(context).cardColor,
           textColor: AppColors.whiteColor,
+          gravity: ToastGravity.BOTTOM,
         );
+        Navigator.of(context).pushReplacementNamed(AppRoutes.homeRouteName);
       } on FirebaseAuthException catch (e) {
         if (e.code == "weak-password") {
-
+          isLoading = false;
           ToastUtils.toastMgs(
             msg: ' the password is not strong enough.',
             backgroundColor: AppColors.redColor,
             textColor: AppColors.whiteColor,
           );
         } else if (e.code == "email-already-in-use") {
+          isLoading = false;
           ToastUtils.toastMgs(
-            msg: 'there already exists an account with the given email address.',
+            msg:
+                'there already exists an account with the given email address.',
             backgroundColor: AppColors.redColor,
             textColor: AppColors.whiteColor,
           );
-
-
         } else {
+          isLoading = false;
           ToastUtils.toastMgs(
             msg: ' error: $e',
             backgroundColor: AppColors.redColor,
@@ -282,8 +305,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
           );
         }
       } catch (e) {
-        print('error: $e');
+        isLoading = false;
+        ToastUtils.toastMgs(
+          msg: ' error: ${e.toString()}',
+          backgroundColor: AppColors.redColor,
+          textColor: AppColors.whiteColor,
+        );
+
       }
+      setState(() {
+
+      });
     }
   }
 }

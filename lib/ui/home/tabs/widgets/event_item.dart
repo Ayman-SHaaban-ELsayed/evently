@@ -1,11 +1,18 @@
+import 'package:final_project/firebase_utils.dart';
+import 'package:final_project/l10n/app_localizations.dart';
+import 'package:final_project/model/event.dart';
 import 'package:final_project/providers/app_theme_provider.dart';
-import 'package:final_project/utils/app_assets.dart';
+import 'package:final_project/utils/app_colors.dart';
 import 'package:final_project/utils/size_utils.dart';
+import 'package:final_project/utils/toast_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class EventItem extends StatelessWidget {
-  const EventItem({super.key});
+  final Event event;
+
+  const EventItem({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +20,7 @@ class EventItem extends StatelessWidget {
     var width = context.width;
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return Container(
-      height: height * .22,
+      height: height * .30,
       padding: EdgeInsets.symmetric(
         horizontal: width * .02,
         vertical: height * .01,
@@ -22,12 +29,8 @@ class EventItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(width: 2, color: Theme.of(context).dividerColor),
         image: DecorationImage(
-         fit: BoxFit.fill,
-          image: AssetImage(
-            themeProvider.isDark()
-                ? AppAssets.birthdayDarkImage
-                : AppAssets.birthdayLightImage,
-          ),
+          fit: BoxFit.fill,
+          image: AssetImage(event.eventImage),
         ),
       ),
       child: Column(
@@ -40,6 +43,7 @@ class EventItem extends StatelessWidget {
               vertical: height * .005,
             ),
             decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 width: 2,
@@ -47,7 +51,8 @@ class EventItem extends StatelessWidget {
               ),
             ),
             child: Text(
-              '21 jan',
+              //todo add date
+              DateFormat('dd MMM').format(event.eventDate).toString(),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
@@ -70,16 +75,35 @@ class EventItem extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  //todo add title
                   Text(
-                    'This is a birthday Party',
+                    event.eventTitle,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   IconButton(
                     onPressed: () {
+                      String successMsg = AppLocalizations.of(context)!
+                          .event_updated_successfully;
                       //todo add to favourite
+                      FirebaseUtils.updateIsFavourite(event)
+                          .then((onValue) {
+                            ToastUtils.toastMgs(
+                              msg: successMsg,
+                              backgroundColor: AppColors.greenColor,
+                              textColor: AppColors.whiteColor,
+                            );
+                          })
+                          .catchError((onError) {
+                            ToastUtils.toastMgs(
+                              msg: onError.toString(),
+                              backgroundColor: AppColors.redColor,
+                              textColor: AppColors.whiteColor,
+                            );
+                          });
                     },
-                    icon: Icon(
-                      Icons.favorite_outline_outlined,
+                    icon: Icon(event.isFavorite?
+                        Icons.favorite
+                     : Icons.favorite_outline_outlined,
                       size: 25,
                       color: Theme.of(context).cardColor,
                     ),
