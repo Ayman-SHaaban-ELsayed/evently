@@ -191,5 +191,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get please_description => 'برجاء ادخال الوصف';
 
   @override
+  String get no_event_found => 'لم نعثر على اى احداث';
+
+  @override
+  String get no_favourite_event_found => 'لم نعثر على اى احداث مفضلة';
+
+  @override
+  String get event_updated_successfully => 'تم تحديث الحدث بنجاح';
+
+  @override
   String get please_enter_email => 'ادخل البريد الالكترونى';
 }

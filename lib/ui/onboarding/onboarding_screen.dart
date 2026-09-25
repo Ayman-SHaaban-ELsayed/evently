@@ -103,7 +103,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             // TODO: تجاوز التوجيه والذهاب للشاشة الرئيسية
                             Navigator.pushReplacementNamed(
                               context,
-                              AppRoutes.homeRouteName,
+                              AppRoutes.loginRouteName,
                             );
                           },
                           child: Text(
@@ -176,7 +176,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       // TODO: التوجيه للشاشة الرئيسية
                       Navigator.pushReplacementNamed(
                         context,
-                        AppRoutes.homeRouteName,
+                        AppRoutes.loginRouteName,
                       );
                     } else {
                       _pageController.nextPage(

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event {
   String id, eventImage, eventName, eventTitle, eventDescription;
+  int eventCategoryIndex;
   DateTime eventDate;
   bool isFavorite;
   static const String collectionName = 'Events';
@@ -13,6 +14,7 @@ class Event {
     required this.eventTitle,
     required this.eventDescription,
     required this.eventDate,
+    required this.eventCategoryIndex,
     this.isFavorite = false,
   });
 
@@ -23,6 +25,7 @@ class Event {
       'eventName': eventName,
       'eventTitle': eventTitle,
       'eventDescription': eventDescription,
+      'eventCategoryIndex': eventCategoryIndex,
       'eventDate': eventDate,
       'isFavorite': isFavorite,
     };
@@ -31,10 +34,11 @@ class Event {
   Event.fromJsonFirestore(Map<String, dynamic> data)
     : this(
         id: data['id'],
-        eventImage: data['eventImage'],
-        eventName: data['eventName'],
+    eventImage: data['eventImage'],
+    eventName: data['eventName'],
         eventTitle: data['eventTitle'],
         eventDescription: data['eventDescription'],
+        eventCategoryIndex: data['eventCategoryIndex'],
         eventDate: (data['eventDate'] as Timestamp).toDate(),
         isFavorite: data['isFavorite'],
       );
