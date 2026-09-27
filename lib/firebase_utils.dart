@@ -113,7 +113,15 @@ class FirebaseUtils {
           }).toList();
         });
   }
+// دالة الحذف
+  static Future<void> deleteEvent(String eventId) {
+    return getEventCollection().doc(eventId).delete();
+  }
 
+  // دالة التحديث الشامل للحدث
+  static Future<void> updateEventInFirestore(Event event) {
+    return getEventCollection().doc(event.id).update(event.toJsonFirestore());
+  }
   //خد بالك
   //WithMap >>.add(map);
   //WithConverter object >>.set(event);

@@ -201,4 +201,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get please_enter_email => 'Enter your email';
+
+  @override
+  String get login_successfully => 'Login successfully';
+
+  @override
+  String get register_successfully => 'Register successfully';
+
+  @override
+  String get account_not_found =>
+      'Account not found, please create an account first.';
+
+  @override
+  String get event_details => 'Event details';
+
+  @override
+  String get edit_event => 'Edit event';
+
+  @override
+  String get update_event => 'Update event';
+
+  @override
+  String get delete_event => 'Delete event';
+
+  @override
+  String get error_msg => 'Error: ';
 }

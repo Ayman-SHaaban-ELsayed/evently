@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:final_project/providers/app_theme_provider.dart';
+import 'package:final_project/providers/user_provider.dart';
 import 'package:final_project/utils/app_assets.dart';
 import 'package:final_project/utils/app_colors.dart';
 import 'package:final_project/utils/app_routes.dart';
@@ -19,11 +20,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 4), () {
-      Navigator.pushReplacementNamed(context, AppRoutes.onboardingHome);
-    });
+    _checkSessionAndNavigate();
   }
+  Future<void> _checkSessionAndNavigate() async {
+     var userProvider = Provider.of<UserProvider>(context, listen: false);
 
+     await userProvider.loadUser();
+
+     await Future.delayed(const Duration(seconds: 4));
+
+    // التأكد من أن الشاشة لا تزال في شجرة البناء
+    if (!mounted) return;
+
+     if (userProvider.currentUser != null) {
+      Navigator.pushReplacementNamed(context, AppRoutes.homeRouteName);
+    } else {
+      Navigator.pushReplacementNamed(context, AppRoutes.onboardingHome);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     var themeProvider = Provider.of<AppThemeProvider>(context);
@@ -38,11 +52,9 @@ class _SplashScreenState extends State<SplashScreen> {
             alignment: Alignment.center,
             child: Image.asset(
               isDark ? AppAssets.logoDarkImage : AppAssets.logoLightImage,
-
               fit: BoxFit.fill,
             ),
           ),
-
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(

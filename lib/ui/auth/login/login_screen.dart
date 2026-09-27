@@ -2,6 +2,7 @@ import 'package:final_project/firebase_utils.dart';
 import 'package:final_project/l10n/app_localizations.dart';
 import 'package:final_project/providers/app_theme_provider.dart';
 import 'package:final_project/providers/user_provider.dart';
+import 'package:final_project/ui/auth/google_server_client_id.dart';
 import 'package:final_project/ui/home/tabs/widgets/main_loading_widget.dart';
 import 'package:final_project/ui/widgets/custom_elevated_button.dart';
 import 'package:final_project/ui/widgets/custom_text_field.dart';
@@ -14,6 +15,8 @@ import 'package:final_project/utils/toast_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -29,7 +32,8 @@ class _LoginScreenState extends State<LoginScreen> {
   var passwordController = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
-  bool isLoading = false;
+  bool isLoginLoading = false;
+  bool isGoogleLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -131,12 +135,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   CustomElevatedButton(
                     onPressed: login,
-                    child: isLoading
+                    child: isLoginLoading
                         ? MainLoadingWidget()
                         : Text(
-                            AppLocalizations.of(context)!.login,
-                            style: AppStyles.medium20White,
-                          ),
+                      AppLocalizations.of(context)!.login,
+                      style: AppStyles.medium20White,
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -155,9 +159,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           AppLocalizations.of(context)!.sign_up,
                           style: Theme.of(context).textTheme.labelLarge
                               ?.copyWith(
-                                decoration: TextDecoration.underline,
-                                decorationColor: Theme.of(context).cardColor,
-                              ),
+                            decoration: TextDecoration.underline,
+                            decorationColor: Theme.of(context).cardColor,
+                          ),
                         ),
                       ),
                     ],
@@ -188,11 +192,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: height * .01),
                   CustomElevatedButton(
-                    onPressed: login,
+                    onPressed: loginWithGoogle,
                     padding: height * .02,
                     borderColor: Theme.of(context).dividerColor,
                     backgroundColor: Theme.of(context).highlightColor,
-                    child: Row(
+                    child: isGoogleLoading
+                        ? MainLoadingWidget()
+                        :  Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       spacing: width * 0.04,
                       children: [
@@ -219,29 +225,29 @@ class _LoginScreenState extends State<LoginScreen> {
     if (formKey.currentState?.validate() == true) {
       try {
         //todo is loading => true
-        isLoading = true;
+        isLoginLoading = true;
         setState(() {});
         //todo auth
         final credintial = await FirebaseAuth.instance
             .signInWithEmailAndPassword(
-              email: emailController.text,
-              password: passwordController.text,
-            );
+          email: emailController.text,
+          password: passwordController.text,
+        );
 
         //todo read data firestore
         var user = await FirebaseUtils.readUserFromFireStore(
           credintial.user?.uid ?? '',
         );
         if (user == null) {
-          isLoading = false;
+          isLoginLoading = false;
           setState(() {});
           return;
         }
         //todo save in provider
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.updateUser(user);
-        //todo isloading =>false
-        isLoading = false;
+        //todo isLoginLoading =>false
+        isLoginLoading = false;
 
         ToastUtils.toastMgs(
           msg: 'login successfully',
@@ -252,7 +258,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.of(context).pushReplacementNamed(AppRoutes.homeRouteName);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'invalid-credential') {
-          isLoading = false;
+          isLoginLoading = false;
           ToastUtils.toastMgs(
             msg: 'the email or password is incorrect.',
             backgroundColor: AppColors.redColor,
@@ -260,7 +266,7 @@ class _LoginScreenState extends State<LoginScreen> {
             gravity: ToastGravity.BOTTOM,
           );
         } else if (e.code == 'network-request-failed') {
-          isLoading = false;
+          isLoginLoading = false;
           ToastUtils.toastMgs(
             msg: '''there was a network request error, for example the user doesn't have internet connection''',
             backgroundColor: AppColors.redColor,
@@ -268,7 +274,7 @@ class _LoginScreenState extends State<LoginScreen> {
             gravity: ToastGravity.BOTTOM,
           );
         } else {
-          isLoading = false;
+          isLoginLoading = false;
           ToastUtils.toastMgs(
             msg: 'errorCode:${e.code}, error: $e',
             backgroundColor: AppColors.redColor,
@@ -277,7 +283,7 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         }
       } catch (e) {
-        isLoading = false;
+        isLoginLoading = false;
         ToastUtils.toastMgs(
           msg: ' error: $e',
           backgroundColor: AppColors.redColor,
@@ -288,4 +294,84 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {});
     }
   }
-}
+
+  void loginWithGoogle() async {
+    try {
+      isGoogleLoading = true;
+      setState(() {});
+
+      // 1. تهيئة محرك جوجل
+      await GoogleSignIn.instance.initialize(
+          serverClientId:GoogleServerClientId.serverClientId
+      );
+
+      // 2. المصادقة (Identity) لمعرفة هوية المستخدم
+      final GoogleSignInAccount? googleUser = await GoogleSignIn.instance.authenticate();
+
+      if (googleUser == null) {
+        isGoogleLoading = false;
+        setState(() {});
+        return;
+      }
+
+      // 3. التفويض (Authorization) للحصول على Access Token
+      final List<String> scopes = ['email', 'profile'];
+      final clientAuth = await googleUser.authorizationClient.authorizeScopes(scopes);
+
+      // 4. إنشاء مفاتيح الاعتماد لفايربيز (من المصدرين المختلفين)
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleUser.authentication.idToken, // يأتي من المصادقة
+        accessToken: clientAuth.accessToken,        // يأتي من التفويض
+      );
+
+      // 5. تسجيل الدخول في فايربيز باستخدام المفاتيح
+      final UserCredential userCredential =
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      // 6. التحقق من وجود المستخدم في قاعدة بيانات Firestore
+      var user = await FirebaseUtils.readUserFromFireStore(
+        userCredential.user?.uid ?? '',
+      );
+
+      if (user == null) {
+        isGoogleLoading = false;
+        setState(() {});
+        if (!context.mounted) return;
+        ToastUtils.toastMgs(
+          msg: AppLocalizations.of(context)!.account_not_found,
+          backgroundColor: AppColors.redColor,
+          textColor: AppColors.whiteColor,
+          gravity: ToastGravity.BOTTOM,
+        );
+        await GoogleSignIn.instance.signOut();
+        return;
+      }
+
+      // 7. حفظ البيانات والانتقال
+      if (!context.mounted) return;
+      var userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.updateUser(user);
+
+      isGoogleLoading = false;
+      setState(() {});
+
+      ToastUtils.toastMgs(
+        msg: AppLocalizations.of(context)!.login_successfully,
+        backgroundColor: Theme.of(context).cardColor,
+        textColor: AppColors.whiteColor,
+        gravity: ToastGravity.BOTTOM,
+      );
+      Navigator.of(context).pushReplacementNamed(AppRoutes.homeRouteName);
+
+    } catch (e) {
+      isGoogleLoading = false;
+      setState(() {});
+      if (!context.mounted) return;
+      ToastUtils.toastMgs(
+        msg: '${AppLocalizations.of(context)!.error_msg}$e',
+        backgroundColor: AppColors.redColor,
+        textColor: AppColors.whiteColor,
+        gravity: ToastGravity.BOTTOM,
+      );
+    }
+  }}

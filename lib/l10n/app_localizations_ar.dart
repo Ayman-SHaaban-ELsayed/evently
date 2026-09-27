@@ -201,4 +201,29 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get please_enter_email => 'ادخل البريد الالكترونى';
+
+  @override
+  String get login_successfully => 'تم تسجيل الدخول بنجاح';
+
+  @override
+  String get register_successfully => 'تم التسجيل بنجاح';
+
+  @override
+  String get account_not_found =>
+      'بيانات الحساب غير موجودة، يرجى إنشاء حساب أولاً';
+
+  @override
+  String get event_details => 'تفاصيل الحدث';
+
+  @override
+  String get edit_event => 'تعديل الحدث';
+
+  @override
+  String get update_event => 'تحديث الحدث';
+
+  @override
+  String get delete_event => 'حذف الحدث';
+
+  @override
+  String get error_msg => 'حدث خطأ: ';
 }

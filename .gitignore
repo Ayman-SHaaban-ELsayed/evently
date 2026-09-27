@@ -54,3 +54,4 @@ app.*.map.json
 /ayman_notes_firestore
 /ayman_notes_future_and_stream_contrloller.dart
 /lib/ui/home/tabs/home/home_tab_hand_sort_deprecated.dart
+/lib/ui/auth/google_server_client_id.dart

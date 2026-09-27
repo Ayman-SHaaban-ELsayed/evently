@@ -3,6 +3,7 @@ import 'package:final_project/l10n/app_localizations.dart';
 import 'package:final_project/model/my_user.dart';
 import 'package:final_project/providers/app_theme_provider.dart';
 import 'package:final_project/providers/user_provider.dart';
+import 'package:final_project/ui/auth/google_server_client_id.dart';
 import 'package:final_project/ui/home/tabs/widgets/main_loading_widget.dart';
 import 'package:final_project/ui/widgets/custom_elevated_button.dart';
 import 'package:final_project/ui/widgets/custom_text_field.dart';
@@ -15,6 +16,7 @@ import 'package:final_project/utils/toast_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -33,7 +35,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   var rePasswordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-  bool isLoading = false;
+  bool isLoginLoading = false;
+  bool isGoogleLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +170,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(height: height * .02),
                   CustomElevatedButton(
                     onPressed: registrt,
-                    child: isLoading
+                    child: isLoginLoading
                         ? MainLoadingWidget()
                         : Text(
                             AppLocalizations.of(context)!.sign_up2,
@@ -223,19 +226,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: height * .01),
                   CustomElevatedButton(
-                    onPressed: () {
-                      //todo : sign up with google
-                    },
+                    //todo : sign up with google
+                    onPressed: signupWithGoogle,
                     padding: height * .02,
                     borderColor: Theme.of(context).dividerColor,
                     backgroundColor: Theme.of(context).highlightColor,
-                    child: Row(
+                    child: isGoogleLoading
+                        ? MainLoadingWidget()
+                        : Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       spacing: width * 0.04,
                       children: [
                         Image.asset(AppAssets.googleLogo),
                         Text(
-                          AppLocalizations.of(context)!.login_with_google,
+                          AppLocalizations.of(context)!.signup_with_google,
                           style: Theme.of(context).textTheme.labelSmall,
                         ),
                       ],
@@ -255,7 +259,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     //todo=> nav to h.screen
     if (formKey.currentState?.validate() == true) {
       try {
-        isLoading = true;
+        isLoginLoading = true;
         setState(() {});
         final credintial = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
@@ -272,7 +276,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         //todo save in provider
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.updateUser(myUser);
-        isLoading = false;
+        isLoginLoading = false;
         ToastUtils.toastMgs(
           msg: 'register successfully',
           backgroundColor: Theme.of(context).cardColor,
@@ -282,14 +286,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Navigator.of(context).pushReplacementNamed(AppRoutes.homeRouteName);
       } on FirebaseAuthException catch (e) {
         if (e.code == "weak-password") {
-          isLoading = false;
+          isLoginLoading = false;
           ToastUtils.toastMgs(
             msg: ' the password is not strong enough.',
             backgroundColor: AppColors.redColor,
             textColor: AppColors.whiteColor,
           );
         } else if (e.code == "email-already-in-use") {
-          isLoading = false;
+          isLoginLoading = false;
           ToastUtils.toastMgs(
             msg:
                 'there already exists an account with the given email address.',
@@ -297,7 +301,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             textColor: AppColors.whiteColor,
           );
         } else {
-          isLoading = false;
+          isLoginLoading = false;
           ToastUtils.toastMgs(
             msg: ' error: $e',
             backgroundColor: AppColors.redColor,
@@ -305,17 +309,91 @@ class _RegisterScreenState extends State<RegisterScreen> {
           );
         }
       } catch (e) {
-        isLoading = false;
+        isLoginLoading = false;
         ToastUtils.toastMgs(
           msg: ' error: ${e.toString()}',
           backgroundColor: AppColors.redColor,
           textColor: AppColors.whiteColor,
         );
-
       }
-      setState(() {
-
-      });
+      setState(() {});
     }
   }
-}
+
+  void signupWithGoogle() async {
+    try {
+      isGoogleLoading = true;
+      setState(() {});
+
+      // 1. تهيئة محرك جوجل
+      await GoogleSignIn.instance.initialize(
+          serverClientId:GoogleServerClientId.serverClientId
+      );
+      // 2. المصادقة (Identity)
+      final GoogleSignInAccount? googleUser = await GoogleSignIn.instance.authenticate();
+
+      if (googleUser == null) {
+        isGoogleLoading = false;
+        setState(() {});
+        return;
+      }
+
+      // 3. التفويض (Authorization) للحصول على Access Token
+      final List<String> scopes = ['email', 'profile'];
+      final clientAuth = await googleUser.authorizationClient.authorizeScopes(scopes);
+
+      // 4. إنشاء مفاتيح الاعتماد لفايربيز
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleUser.authentication.idToken,
+        accessToken: clientAuth.accessToken,
+      );
+
+      // 5. المصادقة مع فايربيز
+      final UserCredential userCredential =
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      // 6. التحقق مما إذا كان المستخدم مسجلاً مسبقاً
+      var existingUser = await FirebaseUtils.readUserFromFireStore(
+        userCredential.user?.uid ?? '',
+      );
+
+      MyUser myUser;
+      if (existingUser == null) {
+        myUser = MyUser(
+          id: userCredential.user?.uid ?? '',
+          name: googleUser.displayName ?? 'No Name',
+          email: googleUser.email,
+        );
+        await FirebaseUtils.addUserToFirestoreWithConverter(myUser);
+      } else {
+        myUser = existingUser;
+      }
+
+      // 7. تحديث المزود والانتقال للشاشة الرئيسية
+      if (!context.mounted) return;
+      var userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.updateUser(myUser);
+
+      isGoogleLoading = false;
+      setState(() {});
+
+      ToastUtils.toastMgs(
+        msg: AppLocalizations.of(context)!.register_successfully,
+        backgroundColor: Theme.of(context).cardColor,
+        textColor: AppColors.whiteColor,
+        gravity: ToastGravity.BOTTOM,
+      );
+      Navigator.of(context).pushReplacementNamed(AppRoutes.homeRouteName);
+
+    } catch (e) {
+      isGoogleLoading = false;
+      setState(() {});
+      if (!context.mounted) return;
+      ToastUtils.toastMgs(
+        msg: '${AppLocalizations.of(context)!.error_msg}${e.toString()}',
+        backgroundColor: AppColors.redColor,
+        textColor: AppColors.whiteColor,
+        gravity: ToastGravity.BOTTOM,
+      );
+    }
+  }}
