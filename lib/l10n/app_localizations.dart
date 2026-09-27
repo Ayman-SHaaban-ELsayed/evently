@@ -475,6 +475,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter your email'**
   String get please_enter_email;
+
+  /// No description provided for @login_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Login successfully'**
+  String get login_successfully;
+
+  /// No description provided for @register_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Register successfully'**
+  String get register_successfully;
+
+  /// No description provided for @account_not_found.
+  ///
+  /// In en, this message translates to:
+  /// **'Account not found, please create an account first.'**
+  String get account_not_found;
+
+  /// No description provided for @event_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Event details'**
+  String get event_details;
+
+  /// No description provided for @edit_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit event'**
+  String get edit_event;
+
+  /// No description provided for @update_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Update event'**
+  String get update_event;
+
+  /// No description provided for @delete_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete event'**
+  String get delete_event;
+
+  /// No description provided for @error_msg.
+  ///
+  /// In en, this message translates to:
+  /// **'Error: '**
+  String get error_msg;
 }
 
 class _AppLocalizationsDelegate

@@ -50,8 +50,8 @@ class _HomeTabState extends State<HomeTab> {
   Widget build(BuildContext context) {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     var languageProvider = Provider.of<AppLanguageProvider>(context);
-    var userProvider=Provider.of<UserProvider>(context );
-     var height = context.height;
+    var userProvider = Provider.of<UserProvider>(context);
+    var height = context.height;
     var width = context.width;
     List<String> eventNameList = [
       AppLocalizations.of(context)!.all,
@@ -73,22 +73,27 @@ class _HomeTabState extends State<HomeTab> {
             spacing: height * .02,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 spacing: width * .02,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!.welcome_back,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      Text(
-                        userProvider.currentUser!.name,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.welcome_back,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        Text(
+                          userProvider.currentUser!.name,
+                          style: Theme.of(context).textTheme.titleMedium,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ),
-                  Spacer(),
+                  // Spacer(),
                   Icon(
                     themeProvider.isDark()
                         ? Icons.dark_mode_outlined
@@ -155,7 +160,8 @@ class _HomeTabState extends State<HomeTab> {
                                   .no_event_found,
                             )
                           : ListView.separated(
-                             padding: EdgeInsets.only(bottom:  height * .08), itemBuilder: (context, index) {
+                              padding: EdgeInsets.only(bottom: height * .08),
+                              itemBuilder: (context, index) {
                                 return EventItem(event: eventList[index]);
                               },
                               separatorBuilder: (context, index) {

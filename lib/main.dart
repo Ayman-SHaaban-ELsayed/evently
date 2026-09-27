@@ -7,6 +7,8 @@ import 'package:final_project/providers/user_provider.dart';
 import 'package:final_project/ui/add_event/add_event_screen.dart';
 import 'package:final_project/ui/auth/login/login_screen.dart';
 import 'package:final_project/ui/auth/register/register_screen.dart';
+import 'package:final_project/ui/edit_event_screen/edit_event_screen.dart';
+import 'package:final_project/ui/event_details_screen/event_details_screen.dart';
 import 'package:final_project/ui/home/home_screen.dart';
 import 'package:final_project/ui/onboarding/onboarding_home.dart';
 import 'package:final_project/ui/onboarding/onboarding_screen.dart';
@@ -58,6 +60,9 @@ class MyApp extends StatelessWidget {
         AppRoutes.loginRouteName: (context) => LoginScreen(),
         AppRoutes.registerScreen: (context) => RegisterScreen(),
         AppRoutes.addEventScreen: (context) => AddEventScreen(),
+        AppRoutes.eventDetailsScreen: (context) => const EventDetailsScreen(),
+        AppRoutes.editEventScreen: (context) => const EditEventScreen(),
+
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

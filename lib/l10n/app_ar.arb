@@ -65,9 +65,13 @@
 "no_event_found": "لم نعثر على اى احداث" ,
 "no_favourite_event_found": "لم نعثر على اى احداث مفضلة" ,
 "event_updated_successfully": "تم تحديث الحدث بنجاح" ,
-
-
-
-
-"please_enter_email": "ادخل البريد الالكترونى"
+"please_enter_email": "ادخل البريد الالكترونى",
+"login_successfully": "تم تسجيل الدخول بنجاح",
+"register_successfully": "تم التسجيل بنجاح",
+"account_not_found": "بيانات الحساب غير موجودة، يرجى إنشاء حساب أولاً",
+"event_details": "تفاصيل الحدث",
+"edit_event": "تعديل الحدث",
+"update_event": "تحديث الحدث",
+"delete_event": "حذف الحدث",
+"error_msg": "حدث خطأ: "
 }
