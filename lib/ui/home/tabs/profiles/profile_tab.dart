@@ -42,7 +42,7 @@ class _ProfileTabState extends State<ProfileTab> {
               backgroundImage: AssetImage(AppAssets.logoRouteImage),
             ),
             Text(
-             userProvider.currentUser!.name,
+              userProvider.currentUser!.name,
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             Text(
@@ -87,10 +87,12 @@ class _ProfileTabState extends State<ProfileTab> {
               icon: IconButton(
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
+                  userProvider.clearUser();
                   //todo logout
-                  Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.loginRouteName,
-                      (route)=>false);
-
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    AppRoutes.loginRouteName,
+                    (route) => false,
+                  );
                 },
                 icon: Icon(Icons.logout, color: AppColors.redColor),
               ),

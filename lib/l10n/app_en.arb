@@ -67,11 +67,14 @@
 "no_event_found": "No event found" ,
 "no_favourite_event_found": "No favourite event found" ,
 "event_updated_successfully": "Event updated successfully" ,
-
-
-
-
-
-"please_enter_email": "Enter your email"
+"please_enter_email": "Enter your email",
+"login_successfully": "Login successfully",
+"register_successfully": "Register successfully",
+"account_not_found": "Account not found, please create an account first.",
+"event_details": "Event details",
+"edit_event": "Edit event",
+"update_event": "Update event",
+"delete_event": "Delete event",
+"error_msg": "Error: "
 
 }
