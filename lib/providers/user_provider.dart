@@ -12,7 +12,6 @@ class UserProvider extends ChangeNotifier {
     final String? id = prefs.getString('user_id');
     final String? name = prefs.getString('user_name');
     final String? email = prefs.getString('user_email');
-    print("dataAyman  $id /  $name $email");
     if (id != null && name != null && email != null) {
       currentUser = MyUser(id: id, name: name, email: email);
       notifyListeners();
